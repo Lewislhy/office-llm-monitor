@@ -52,8 +52,8 @@ nothing reaches in from outside — the box pulls. See `deploy/README.md`.
 
 ## Deployed from
 
-`main` on this repo, checked out at `/home/efficient/office-llm-monitor` on
-`efficient-office-llm`. Nothing else is edited in place on that box.
+`main` on this repo, checked out on the box that runs it. Nothing is edited in place
+there — a change reaches it by being pushed here.
 
 ## Contributing
 
