@@ -50,6 +50,11 @@ Push to `main`. The box checks this repo every minute, and when `main` has moved
 restarts the service, and waits for the health check. There is no deploy key in GitHub and
 nothing reaches in from outside — the box pulls. See `deploy/README.md`.
 
+## Deployed from
+
+`main` on this repo, checked out at `/home/efficient/office-llm-monitor` on
+`efficient-office-llm`. Nothing else is edited in place on that box.
+
 ## Contributing
 
 CI runs on every push and pull request: it compiles the Python, runs the smoke test (which
