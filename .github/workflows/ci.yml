@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Compile the Python
+        run: python -m compileall -q llm_monitor.py tests/
+
+      # The page is one big file with inline CSS and JS. A stray brace has silently killed
+      # every rule after it before, and nothing at runtime says so — hence these checks.
+      - name: Check the page holds together
+        run: python tests/page_check.py
+
+      - name: Smoke test against a fake llama-server
+        run: python tests/smoke.py
+
+      - name: Warn about leftovers
+        run: |
+          if ls *.bak* 2>/dev/null | grep -q .; then
+            echo "::warning::backup files committed: $(ls *.bak*)"
+          fi
+          if grep -rn "console\.log(" monitor_page.html | head -5 | grep -q .; then
+            echo "::notice::monitor_page.html still has console.log calls"
+          fi

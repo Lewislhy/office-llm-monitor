@@ -1,0 +1,19 @@
+[Unit]
+Description=Efficient ERP Office LLM monitor (web page for the llama-server on :8080)
+After=network-online.target tailscaled.service
+Wants=network-online.target
+Requires=tailscaled.service
+
+[Service]
+Type=simple
+User=efficient
+Group=efficient
+WorkingDirectory=/home/efficient/office-llm-monitor
+Environment=TZ=Australia/Sydney
+# 127.0.0.1 on purpose: the only way in is `tailscale serve`, which stamps who is calling.
+ExecStart=/usr/bin/python3 /home/efficient/office-llm-monitor/llm_monitor.py --host 127.0.0.1 --port 8765 --db /home/efficient/qwen-monitor/monitor.db
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

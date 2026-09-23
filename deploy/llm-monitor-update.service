@@ -1,0 +1,9 @@
+[Unit]
+Description=Pull the monitor repo and redeploy if main moved
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=efficient
+WorkingDirectory=/home/efficient/office-llm-monitor
+ExecStart=/home/efficient/office-llm-monitor/deploy/update.sh

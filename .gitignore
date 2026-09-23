@@ -1,0 +1,8 @@
+# runtime state, never committed
+monitor.db
+monitor.db-*
+*.bak
+*.bak.*
+__pycache__/
+*.pyc
+.DS_Store
